@@ -27,11 +27,8 @@ public class PokerFace {
 
 	public static native int mprotect(long addr, long len, int prot);
 
-	/** Get system configuration. Calls sysconf from libcore through reflection. */
-	public static long sysconf(int name) throws Exception {
-		Method osSysconf = Class.forName("libcore.io.Os").getMethod("sysconf", Integer.TYPE);
-		return (Long) osSysconf.invoke(Class.forName("libcore.io.Libcore").getField("os").get(null), name);
-	}
+	/** Get system configuration. Is here because Libcore is available on (some old?) Gingerbread versions */
+	public static native long sysconf(int name);
 
 	/** Creates a direct ByteBuffer to an area of memory using a libcore implementation. */
 
